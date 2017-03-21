@@ -148,7 +148,9 @@ with graph.as_default():
     valid_dataset = tf.constant(valid_examples, dtype=tf.int32)
 
     with tf.device('/cpu:0'):
+        # 随机生成所有单词的词向量
         embeddings = tf.Variable(tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))
+        # 在词向量中寻找输入的对应向量
         embed = tf.nn.embedding_lookup(embeddings, train_inputs)
         # 权重
         nce_weights = tf.Variable(
@@ -213,7 +215,7 @@ with graph.as_default():
 
             final_embeddings = normalized_embeddings.eval()
 
-            # 可视化
+            # 结果可视化
             tsne = TSNE(perplexity=30, n_components=2, init='pca', n_iter=5000)
             plot_only = 500
             low_dim_embs = tsne.fit_transform(final_embeddings[:plot_only,:])
