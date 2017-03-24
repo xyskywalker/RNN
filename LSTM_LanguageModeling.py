@@ -16,6 +16,7 @@ class PTBInput(object):
         self.epoch_size = ((len(data)//batch_size) - 1) // num_steps
         self.input_data, self.targets = reader.ptb_producer(data, batch_size, num_steps, name=name)
 
+
 # 定义语言模型
 class PTBModel(object):
     def __init__(self, is_training, config, input_):
@@ -67,7 +68,6 @@ class PTBModel(object):
         softmax_b = tf.get_variable('softmax_b', [vocab_size], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
 
-
         loss = tfc.legacy_seq2seq.sequence_loss_by_example(
             [logits],
             [tf.reshape(input_.targets, [-1])],
@@ -88,10 +88,8 @@ class PTBModel(object):
         optimizer = tf.train.GradientDescentOptimizer(self._lr)
         self._train_op = optimizer.apply_gradients(zip(grads, tvars),
                                                    global_step=tfc.framework.get_or_create_global_step())
-
         self._new_lr = tf.placeholder(tf.float32, shape=[], name='new_learning_rate')
         self._lr_update = tf.assign(self._lr, self._new_lr)
-
 
     def assign_lr(self, session, lr_value):
         session.run(self._lr_update, feed_dict={self._new_lr: lr_value})
@@ -119,7 +117,6 @@ class PTBModel(object):
     @property
     def train_op(self):
         return self._train_op
-
 
 
 class SmallConfig(object):
