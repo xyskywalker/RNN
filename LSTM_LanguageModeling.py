@@ -216,10 +216,10 @@ def run_epoch(session, model, eval_op=None, verbose=False):
                       np.exp(costs / iters),
                       iters * model.input.batch_size / (time.time() - start_time)
                   ))
+    return np.exp(costs / iters)
 
-    return  np.exp(costs / iters)
-
-raw_data = reader.ptb_raw_data('downloads/PTB/')
+raw_data = reader.ptb_raw_data('simple-examples/data/')
+# raw_data = reader.ptb_raw_data('downloads/PTB/')
 train_data, valid_data, test_data, _ = raw_data
 
 config = SmallConfig()
