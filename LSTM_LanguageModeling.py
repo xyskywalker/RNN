@@ -222,8 +222,8 @@ raw_data = reader.ptb_raw_data('simple-examples/data/')
 # raw_data = reader.ptb_raw_data('downloads/PTB/')
 train_data, valid_data, test_data, _ = raw_data
 
-config = SmallConfig()
-eval_config = SmallConfig()
+config = MediumConfig()
+eval_config = MediumConfig()
 eval_config.batch_size = 1
 eval_config.num_steps = 1
 

@@ -11,9 +11,9 @@ mnist = input_data.read_data_sets('downloads/MNIST_data/', one_hot=True)
 
 # 参数
 learning_rate = 0.01
-max_samples = 400000
-batch_size = 128
-display_step = 10
+max_samples = 800000
+batch_size = 512
+display_step = 100
 
 n_input = 28
 n_steps = 28
